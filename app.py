@@ -18,9 +18,19 @@ def login_validation():
     cursor = connection.cursor()
     user = cursor.execute("SELECT * FROM USERS WHERE email=? AND password=?", (email,password)).fetchall()
     if len(user) > 0:
-        return 'welcome'
+        return redirect(f'/home?fname={user[0][0]}&lname={user[0][1]}&email={user[0][2]}')
     else:
         return redirect('/')
+    
+@app.route('/home')
+def home():
+    fname = request.args.get('fname')
+    lname = request.args.get('lname')
+    email = request.args.get('email')
+
+    return render_template('home.html', fname=fname, lname=lname, email=email)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
