@@ -1,6 +1,8 @@
+from waitress import serve
 from flask import Flask, render_template, request, redirect
 import sqlite3
 import os
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -53,5 +55,5 @@ def add_user():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    serve(app, host="0.0.0.0", port=8000)
 
