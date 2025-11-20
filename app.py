@@ -3,11 +3,11 @@ from flask import Flask, render_template, request, redirect
 import sqlite3
 import os
 
-
+  
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-@app.rounte('/')
+@app.route('/')
 def login():
     return render_template('login.html')
 
@@ -32,7 +32,7 @@ def home():
 
     return render_template('home.html', fname=fname, lname=lname, email=email)
 
-@app.route('/add_user', Methods=['POST'])
+@app.route('/add_user', methods=['POST'])
 def add_user():
     fname = request.form.get('fname')
     lname = request.form.get('lname')
